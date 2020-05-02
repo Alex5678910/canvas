@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test-3</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+<div id="app">
+    <button @click="addItem" @mouseover="addItems">Фильтр</button>
+    <ul>
+        <li v-for="e in numbers" @mouseover="addItems">{{ e }}</li>
+    </ul>
+    <h1 v-html:href="google" @mouseover="addItems"></h1>
+    <!--  :href - это аргумент-->
+
+    <hr>
+    <h2>{{ tit }} = {{ counter }}</h2>
+    <button @click="enter(5, $event, 'Изменено на +5')">Увеличить на 5</button>
+    <button @click="enter(10, $event ,'Изменено на +10')">Увеличить на 10</button>
+
+    <hr>
+
+    <input type="text" v-model="titka">
+    <button v-if="ent <= 7">КРАСАВА</button>
+
+    <h2 ref="head">{{ titca }}</h2>
+    <button @click="blick">Как дела</button>
+
+    <hr>
+
+    <button :class="largeg" :style="{'background': bor, 'margin-left': bory + 'px'}">{{ tite }}</button>
+
+    <ul>
+        <li>
+            <input type="checkbox" v-model="fontSize">
+        </li>
+        <li>
+            <input type="checkbox" v-model="border">
+        </li>
+        <li>
+            <input type="text" v-model="bor">
+        </li>
+        <li>
+            <input type="range" v-model="bory">
+        </li>
+    </ul>
+
+</div>
+
+
+</body>
+<script>
+
+    let app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                numbers: [-22, 53, 14, -55, -71, 19, 34, 48, -66, -15, -16, -21, 36, 46, -18],
+                tit: 'Счётчик',
+                counter: 0,
+                google: '<a href="http://google.com" target="_blank">Google</a>',
+                titka: '',
+                titca: 'Отличного денечка',
+                tite: 'Всё в норме',
+                fontSize: false,
+                border: false,
+                bor: '',
+                bory: 2,
+            }
+        },
+        methods: {
+            addItem() {
+                let nim = this.numbers.filter(function (numer) {
+                    return numer > 0;
+                });
+                this.numbers = nim
+            },
+            /*================================================================filter=================================================*/
+            addItems(ev) {
+                ev.target.style.color = 'green'
+            },
+            enter(nums, event, str) {
+                this.counter += nums;
+                this.tit = str;
+
+                if (nums === 5) {
+                    event.target.style.color = 'blue'
+                } else if (nums === 10) {
+                    event.target.style.color = 'purple'
+                }
+            },
+            blick() {
+                this.titca = 'Оп она оп она'
+                this.$refs.head.style.background = 'pink'
+
+            }
+        },
+        computed: {
+            ent() {
+                return this.titka.length
+            },
+            largeg() {
+                return {
+                    'large': this.fontSize,
+                    'border': this.border
+                }
+            }
+        }
+    });
+
+</script>
+
+<style>
+    .large {
+        font-size: 50px
+    }
+
+    .border {
+        border: 1px solid darkmagenta
+    }
+</style>
+</html>
+
+<!--Стрелочные функции
+var elements = [
+  'Hydrogen',
+  'Helium',
+  'Lithium',
+  'Beryllium'
+];
+elements.map(function(element) {
+return element.length;
+});
+
+elements.map(element => element.length); -->

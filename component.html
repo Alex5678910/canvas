@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Component</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <my-counter v-for="coun in 4">{{ coun }}</my-counter>
+</div>
+
+<script>
+
+    Vue.component('my-counter', {
+        template: `<div style="border: 1px solid black; padding: 10px;">
+    <h2>Counter: {{ counter }}</h2>
+    <button @click="Add">Клацни</button>
+    </div>`,
+        data(){
+            return {
+                counter: 0
+            }
+        },
+        methods: {
+            Add(){
+                this.counter++
+            }
+        }
+    });
+    new Vue({
+        el: '#app'
+    })
+
+</script>
+
+</body>
+</html>

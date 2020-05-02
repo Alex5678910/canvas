@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test-4</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+<div id="app">
+    <input v-model="newItem">
+    <button @click="addItem">Добавить</button>
+    <ul>
+        <li v-for="(item, index) in items" @click="removeItem(index)">{{ item }}</li>
+    </ul>
+</div>
+
+</body>
+<script>
+
+    let app = new Vue({
+        el: '#app',
+        data: {
+            newItem: '',
+            items: ['a', 'b', 'c', 'd', 'e'],
+        },
+        methods: {
+            addItem: function() {
+                this.items.push(this.newItem);
+            },
+            removeItem: function(index) {
+                this.items.splice(index, 1);
+            }
+        }
+    });
+
+
+</script>
+</html>
+
+
+<!--this.text = this.text[0].toUpperCase() + this.text.slice(1); Заглавная первая буква-->
